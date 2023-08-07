@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+import RootLayout from "./components/Root/RootLayout";
+import Basket from "./components/basket/Basket-index";
+
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+import Home from "./components/Home/HomeIndex";
 
 function App() {
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayout />}>
+         <Route path="/" element={<Home />} />
+        <Route path="/basket" element={<Basket />} />
+      </Route>
+    )
+  );
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className=" text-center text-3xl font-medium mt-2 py-4">
+        A Practical Application with Redux
+      </h1>
+      <RouterProvider router={router} />
     </div>
   );
 }
